@@ -4,10 +4,14 @@ import com.dreamscape.saguaro.core.registry.ModBlocks;
 import com.dreamscape.saguaro.core.registry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -33,12 +37,14 @@ public class Saguaro
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::enqueueIMC);
         modEventBus.addListener(this::processIMC);
-        modEventBus.addListener(this::doClientStuff);
+        //modEventBus.addListener(this::doClientStuff);
 
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
 
+
         MinecraftForge.EVENT_BUS.register(this);
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> this::initClientStuff);
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -46,8 +52,15 @@ public class Saguaro
         LOGGER.info("Welcome to your Dreamscape!");
     }
 
+    public void initClientStuff()
+    {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+    }
+
     private void doClientStuff(final FMLClientSetupEvent event) {
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAGUARO_ARM.get(), RenderType.func_228643_e_());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
