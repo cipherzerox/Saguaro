@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "saguaro",
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "saguaro:saguaro_planks"
+    }
+  },
+  "result": {
+    "item": "saguaro:saguaro_fence_gate"
+  }
+}

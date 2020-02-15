@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "saguaro",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "saguaro:saguaro_planks"
+    }
+  },
+  "result": {
+    "item": "saguaro:saguaro_slab",
+    "count": 6
+  }
+}

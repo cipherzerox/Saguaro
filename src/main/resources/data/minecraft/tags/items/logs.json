@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "saguaro:saguaro_stem",
+    "saguaro:saguaro",
+    "saguaro:stripped_saguaro_stem",
+    "saguaro:stripped_saguaro"
+  ]
+}

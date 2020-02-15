@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "saguaro:block/stripped_saguaro" },
+        "axis=z": { "model": "saguaro:block/stripped_saguaro", "x": 90 },
+        "axis=x": { "model": "saguaro:block/stripped_saguaro", "x": 90, "y": 90 }
+    }
+}

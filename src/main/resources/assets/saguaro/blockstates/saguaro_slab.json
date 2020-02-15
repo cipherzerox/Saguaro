@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "saguaro:block/saguaro_slab" },
+        "type=top": { "model": "saguaro:block/saguaro_slab_top" },
+        "type=double": { "model": "saguaro:block/saguaro_planks" }
+    }
+}

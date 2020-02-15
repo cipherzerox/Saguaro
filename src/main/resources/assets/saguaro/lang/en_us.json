@@ -1,0 +1,15 @@
+{
+	"block.saguaro.saguaro_stem" : "Saguaro Stem",
+	"block.saguaro.saguaro" : "Saguaro",
+	"block.saguaro.stripped_saguaro_stem" : "Stripped Saguaro Stem",
+	"block.saguaro.stripped_saguaro" : "Stripped Saguaro",
+	"block.saguaro.saguaro_planks" : "Saguaro Planks",
+	"block.saguaro.saguaro_slab" : "Saguaro Slab",
+	"block.saguaro.saguaro_stairs" : "Saguaro Stairs",
+	"block.saguaro.saguaro_fence" : "Saguaro Fence",
+	"block.saguaro.saguaro_fence_gate" : "Saguaro Fence Gate",
+	"block.saguaro.saguaro_button" : "Saguaro Stem Button",
+	"block.saguaro.saguaro_pressure_plate" : "Saguaro Pressure Plate",
+	"block.saguaro.saguaro_door" : "Saguaro Door",
+	"block.saguaro.saguaro_trapdoor" : "Saguaro Trapdoor"
+}

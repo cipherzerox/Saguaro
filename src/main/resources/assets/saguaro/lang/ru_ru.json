@@ -1,0 +1,15 @@
+{
+	"block.saguaro.saguaro_stem" : "Ствол сагуаро",
+	"block.saguaro.saguaro" : "Сагуаро",
+	"block.saguaro.stripped_saguaro_stem" : "Обтёсанный ствол сагуаро",
+	"block.saguaro.stripped_saguaro" : "Обтёсанный сагуаро",
+	"block.saguaro.saguaro_planks" : "Доски из сагуаро",
+	"block.saguaro.saguaro_slab" : "Плита из сагуаро",
+	"block.saguaro.saguaro_stairs" : "Ступеньки из сагуаро",
+	"block.saguaro.saguaro_fence" : "Забор из сагуаро",
+	"block.saguaro.saguaro_fence_gate" : "Залитка из сагуаро",
+	"block.saguaro.saguaro_button" : "Кнопка из сагуаро",
+	"block.saguaro.saguaro_pressure_plate" : "Нажимная плита из сагуаро",
+	"block.saguaro.saguaro_door" : "Дверь из сагуаро",
+	"block.saguaro.saguaro_trapdoor" : "Люк из сагуаро"
+}

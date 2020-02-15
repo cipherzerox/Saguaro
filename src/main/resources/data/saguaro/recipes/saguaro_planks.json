@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "saguaro",
+  "ingredients": [
+    {
+      	"tag": "saguaro:saguaro_stems"
+    }
+  ],
+  "result": {
+    "item": "saguaro:saguaro_planks",
+    "count": 4
+  }
+}

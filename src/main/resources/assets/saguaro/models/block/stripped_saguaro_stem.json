@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "saguaro:block/stripped_saguaro_stem_top",
+        "side": "saguaro:block/stripped_saguaro_stem"
+    }
+}

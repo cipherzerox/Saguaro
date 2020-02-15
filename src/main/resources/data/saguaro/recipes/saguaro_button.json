@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "saguaro",
+  "ingredients": [
+    {
+      "item": "saguaro:saguaro_planks"
+    }
+  ],
+  "result": {
+    "item": "saguaro:saguaro_button"
+  }
+}

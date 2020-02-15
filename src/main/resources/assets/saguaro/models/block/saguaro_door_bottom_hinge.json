@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom_rh",
+    "textures": {
+        "bottom": "saguaro:block/saguaro_door_bottom",
+        "top": "saguaro:block/saguaro_door_top"
+    }
+}
