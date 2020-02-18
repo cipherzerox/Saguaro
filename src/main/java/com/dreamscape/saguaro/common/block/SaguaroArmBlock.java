@@ -82,6 +82,11 @@ public class SaguaroArmBlock extends BushBlock {
             boolean isEast = isAttachable(eastState);
             boolean isSouth = isAttachable(southState);
             boolean isWest = isAttachable(westState);
+            if (!stateIn.get(ATTACHED)) {
+                if (isValidGround(stateIn, worldIn, currentPos)) {
+                    return Blocks.AIR.getDefaultState();
+                }
+            }
             if ((!isNorth || !isSouth || !isEast || !isWest) && !stateIn.get(ATTACHED)) {
                 return Blocks.AIR.getDefaultState();
             }
@@ -98,8 +103,19 @@ public class SaguaroArmBlock extends BushBlock {
     }
 
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        BlockPos blockpos = pos.down();
-        return true;
+        BlockPos north = pos.north();
+        BlockPos east = pos.east();
+        BlockPos south = pos.south();
+        BlockPos west = pos.west();
+        BlockState northState = worldIn.getBlockState(north);
+        BlockState eastState = worldIn.getBlockState(east);
+        BlockState southState = worldIn.getBlockState(south);
+        BlockState westState = worldIn.getBlockState(west);
+        boolean isNorth = isAttachable(northState);
+        boolean isEast = isAttachable(eastState);
+        boolean isSouth = isAttachable(southState);
+        boolean isWest = isAttachable(westState);
+        return isNorth || isSouth || isEast || isWest || isValidGround(state, worldIn, pos);
     }
 
     public boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
