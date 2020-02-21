@@ -1,0 +1,24 @@
+{
+	"block.saguaro.break":
+    {
+        "category": "block",
+        "subtitle": "Saguaro Breaks",
+        "sounds": [
+        	{ "name": "saguaro:block/saguaro_break", "stream": false },
+        	{ "name": "saguaro:block/saguaro_break2", "stream": false },
+        	{ "name": "saguaro:block/saguaro_break3", "stream": false },
+        	{ "name": "saguaro:block/saguaro_break4", "stream": false }
+        ]
+    },
+    "block.saguaro.step":
+    {
+        "category": "block",
+        "subtitle": "Saguaro Step",
+        "sounds": [
+        	{ "name": "saguaro:block/saguaro_step", "stream": false },
+        	{ "name": "saguaro:block/saguaro_step2", "stream": false },
+        	{ "name": "saguaro:block/saguaro_step3", "stream": false },
+        	{ "name": "saguaro:block/saguaro_step4", "stream": false }
+        ]
+    }
+}

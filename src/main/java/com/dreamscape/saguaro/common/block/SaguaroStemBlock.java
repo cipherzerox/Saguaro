@@ -1,9 +1,11 @@
 package com.dreamscape.saguaro.common.block;
 
 import com.dreamscape.saguaro.core.registry.ModBlocks;
+import com.dreamscape.saguaro.core.registry.ModSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.RotatedPillarBlock;
+import net.minecraft.block.SoundType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.util.*;
@@ -14,8 +16,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
 public class SaguaroStemBlock extends RotatedPillarBlock {
-    public SaguaroStemBlock(Properties p_i48339_1_) {
-        super(p_i48339_1_);
+    public SaguaroStemBlock(Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -47,5 +49,11 @@ public class SaguaroStemBlock extends RotatedPillarBlock {
             return ActionResultType.SUCCESS;
         }
         return super.func_225533_a_(state, worldIn, pos, player, hand, rayTraceResult);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public SoundType getSoundType(BlockState p_220072_1_) {
+        return ModSoundEvents.ModSoundTypes.SAGUARO;
     }
 }

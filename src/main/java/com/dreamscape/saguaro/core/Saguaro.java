@@ -2,8 +2,8 @@ package com.dreamscape.saguaro.core;
 
 import com.dreamscape.saguaro.core.registry.ModBlocks;
 import com.dreamscape.saguaro.core.registry.ModItems;
+import com.dreamscape.saguaro.core.registry.ModSoundEvents;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
@@ -41,7 +41,7 @@ public class Saguaro
 
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
-
+        ModSoundEvents.SOUNDS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         DistExecutor.runWhenOn(Dist.CLIENT, () -> this::initClientStuff);
@@ -60,7 +60,9 @@ public class Saguaro
     private void doClientStuff(final FMLClientSetupEvent event) {
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
 
-        RenderTypeLookup.setRenderLayer(ModBlocks.SAGUARO_ARM.get(), RenderType.func_228643_e_());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAGUARO_BRANCH.get(), RenderType.func_228643_e_());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAGUARO_DOOR.get(), RenderType.func_228643_e_());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAGUARO_TRAPDOOR.get(), RenderType.func_228643_e_());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

@@ -19,14 +19,14 @@ import net.minecraft.world.IWorldReader;
 
 import javax.annotation.Nullable;
 
-public class SaguaroArmBlock extends BushBlock {
+public class SaguaroBranchBlock extends BushBlock {
     public static final BooleanProperty ATTACHED;
     public static final DirectionProperty FACING;
 
     protected static final VoxelShape ATTACHED_SHAPE;
     protected static final VoxelShape TOP_SHAPE;
 
-    public SaguaroArmBlock(Properties p_i48437_1_) {
+    public SaguaroBranchBlock(Properties p_i48437_1_) {
         super(p_i48437_1_);
         this.setDefaultState(this.stateContainer.getBaseState().with(ATTACHED, false));
     }
@@ -120,7 +120,7 @@ public class SaguaroArmBlock extends BushBlock {
 
     public boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         Block block = state.getBlock();
-        return block.isIn(BlockTags.BAMBOO_PLANTABLE_ON) || block == ModBlocks.SAGUARO_ARM.get();
+        return block.isIn(BlockTags.BAMBOO_PLANTABLE_ON) || block == ModBlocks.SAGUARO_BRANCH.get();
     }
 
     @SuppressWarnings("deprecation")
