@@ -60,9 +60,9 @@ public class Saguaro
     private void doClientStuff(final FMLClientSetupEvent event) {
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
 
-        RenderTypeLookup.setRenderLayer(ModBlocks.SAGUARO_BRANCH.get(), RenderType.func_228643_e_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SAGUARO_DOOR.get(), RenderType.func_228643_e_());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SAGUARO_TRAPDOOR.get(), RenderType.func_228643_e_());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAGUARO_BRANCH.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAGUARO_DOOR.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAGUARO_TRAPDOOR.get(), RenderType.getCutout());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -82,8 +82,6 @@ public class Saguaro
         LOGGER.info("Hello from server starting!");
     }
 
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
         @SubscribeEvent

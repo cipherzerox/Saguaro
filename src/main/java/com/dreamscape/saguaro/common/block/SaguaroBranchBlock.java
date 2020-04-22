@@ -1,6 +1,7 @@
 package com.dreamscape.saguaro.common.block;
 
 import com.dreamscape.saguaro.core.registry.ModBlocks;
+import com.dreamscape.saguaro.core.registry.ModSoundEvents;
 import net.minecraft.block.*;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.item.BlockItemUseContext;
@@ -16,10 +17,12 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.PlantType;
 
 import javax.annotation.Nullable;
 
-public class SaguaroBranchBlock extends BushBlock {
+public class SaguaroBranchBlock extends Block implements IPlantable {
     public static final BooleanProperty ATTACHED;
     public static final DirectionProperty FACING;
 
@@ -65,6 +68,7 @@ public class SaguaroBranchBlock extends BushBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
         BlockPos down = currentPos.down();
         BlockState downState = worldIn.getBlockState(down);
@@ -102,6 +106,7 @@ public class SaguaroBranchBlock extends BushBlock {
         return isCactus;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
         BlockPos north = pos.north();
         BlockPos east = pos.east();
@@ -133,5 +138,21 @@ public class SaguaroBranchBlock extends BushBlock {
         FACING = HorizontalBlock.HORIZONTAL_FACING;
         ATTACHED_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
         TOP_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+    }
+
+    @Override
+    public PlantType getPlantType(IBlockReader world, BlockPos pos) {
+        return PlantType.Desert;
+    }
+
+    @Override
+    public BlockState getPlant(IBlockReader world, BlockPos pos) {
+        return this.getDefaultState();
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public SoundType getSoundType(BlockState p_220072_1_) {
+        return ModSoundEvents.ModSoundTypes.SAGUARO;
     }
 }

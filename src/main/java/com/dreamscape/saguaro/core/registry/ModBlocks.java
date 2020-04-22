@@ -32,7 +32,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> SAGUARO_PRESSURE_PLATE    = createBlock("saguaro_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.CACTUS, MaterialColor.FOLIAGE).hardnessAndResistance(0.4F).harvestLevel(0).harvestTool(ToolType.AXE)), ItemGroup.REDSTONE);
     public static final RegistryObject<Block> SAGUARO_DOOR              = createBlock("saguaro_door", () -> new DoorBlock(Block.Properties.create(Material.CACTUS, MaterialColor.FOLIAGE).hardnessAndResistance(0.4F).harvestLevel(0).harvestTool(ToolType.AXE)), ItemGroup.REDSTONE);
     public static final RegistryObject<Block> SAGUARO_TRAPDOOR          = createBlock("saguaro_trapdoor", () -> new TrapDoorBlock(Block.Properties.create(Material.CACTUS, MaterialColor.FOLIAGE).hardnessAndResistance(0.4F).harvestLevel(0).harvestTool(ToolType.AXE)), ItemGroup.REDSTONE);
-    public static final RegistryObject<Block> SAGUARO_BRANCH            = createBlock("saguaro_arm", () -> new SaguaroBranchBlock(Block.Properties.create(Material.CACTUS, MaterialColor.FOLIAGE).hardnessAndResistance(0.4F).harvestLevel(0).harvestTool(ToolType.AXE).func_226896_b_()), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> SAGUARO_BRANCH            = createBlock("saguaro_branch", () -> new SaguaroBranchBlock(Block.Properties.create(Material.CACTUS, MaterialColor.FOLIAGE).hardnessAndResistance(0.4F).harvestLevel(0).harvestTool(ToolType.AXE)), ItemGroup.DECORATIONS);
 
     public static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<? extends B> supplier, ItemGroup itemGroup) {
         RegistryObject<B> block = ModBlocks.BLOCKS.register(name, supplier);
