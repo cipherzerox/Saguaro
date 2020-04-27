@@ -37,7 +37,7 @@ public class SaguaroStemBlock extends RotatedPillarBlock {
 
     @Override
     @SuppressWarnings("deprecation")
-    public ActionResultType func_225533_a_(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTraceResult) {
         Block block = state.getBlock();
         if((block == ModBlocks.SAGUARO_STEM.get() || block == ModBlocks.SAGUARO.get()) && player.getHeldItemMainhand().getItem() instanceof AxeItem) {
             worldIn.playSound(player, pos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 2.0F, 1.0F);
@@ -48,7 +48,7 @@ public class SaguaroStemBlock extends RotatedPillarBlock {
             }
             return ActionResultType.SUCCESS;
         }
-        return super.func_225533_a_(state, worldIn, pos, player, hand, rayTraceResult);
+        return super.onBlockActivated(state, worldIn, pos, player, hand, rayTraceResult);
     }
 
     @Override

@@ -11,5 +11,6 @@
 	"block.saguaro.saguaro_button" : "Кнопка из сагуаро",
 	"block.saguaro.saguaro_pressure_plate" : "Нажимная плита из сагуаро",
 	"block.saguaro.saguaro_door" : "Дверь из сагуаро",
-	"block.saguaro.saguaro_trapdoor" : "Люк из сагуаро"
+	"block.saguaro.saguaro_trapdoor" : "Люк из сагуаро",
+	"block.saguaro.saguaro_branch" : "Ветвь сагуаро"
 }

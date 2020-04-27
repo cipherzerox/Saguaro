@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=down": { "model": "saguaro:block/saguaro_branch_top" },
+        "facing=north": { "model": "saguaro:block/saguaro_branch" },
+        "facing=east": { "model": "saguaro:block/saguaro_branch", "y": 90 },
+        "facing=south": { "model": "saguaro:block/saguaro_branch", "y": 180 },
+        "facing=west": { "model": "saguaro:block/saguaro_branch", "y": 270 }
+    }
+}

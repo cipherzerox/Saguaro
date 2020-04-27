@@ -17,115 +17,69 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
-public class SaguaroBranchBlock extends Block implements IPlantable {
-    public static final BooleanProperty ATTACHED;
+public class SaguaroBranchBlock extends BushBlock implements IGrowable {
     public static final DirectionProperty FACING;
-
-    protected static final VoxelShape ATTACHED_SHAPE;
-    protected static final VoxelShape TOP_SHAPE;
+    private static final VoxelShape DOWN_SHAPE;
+    private static final VoxelShape EAST_SHAPE;
+    private static final VoxelShape NORTH_SHAPE;
+    private static final VoxelShape SOUTH_SHAPE;
+    private static final VoxelShape WEST_SHAPE;
 
     public SaguaroBranchBlock(Properties p_i48437_1_) {
         super(p_i48437_1_);
-        this.setDefaultState(this.stateContainer.getBaseState().with(ATTACHED, false));
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING,  Direction.DOWN));
     }
-
-
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(ATTACHED, FACING);
+        builder.add(FACING);
     }
 
     @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState state, IBlockReader blockReader, BlockPos pos, ISelectionContext context) {
-        return state.get(ATTACHED) ? ATTACHED_SHAPE : TOP_SHAPE;
-    }
-
-    @Nullable
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        IWorldReader worldIn = context.getWorld();
-        BlockPos pos = context.getPos();
-        BlockPos north = pos.north();
-        BlockPos east = pos.east();
-        BlockPos south = pos.south();
-        BlockPos west = pos.west();
-        BlockPos down = pos.down();
-        BlockState northState = worldIn.getBlockState(north);
-        BlockState eastState = worldIn.getBlockState(east);
-        BlockState southState = worldIn.getBlockState(south);
-        BlockState westState = worldIn.getBlockState(west);
-        BlockState downState = worldIn.getBlockState(down);
-        boolean isNorth = isAttachable(northState);
-        boolean isEast = isAttachable(eastState);
-        boolean isSouth = isAttachable(southState);
-        boolean isWest = isAttachable(westState);
-        boolean isValidGround = isValidGround(downState, worldIn, down);
-        return this.getDefaultState().with(ATTACHED, (isNorth || isEast || isSouth || isWest) && !isValidGround).with(FACING, isNorth ? Direction.NORTH : isEast ? Direction.EAST : isSouth ? Direction.SOUTH : Direction.WEST);
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        BlockPos down = currentPos.down();
-        BlockState downState = worldIn.getBlockState(down);
-        boolean isValidGround = isValidGround(downState, worldIn, down);
-        if (!isValidGround) {
-            BlockPos north = currentPos.north();
-            BlockPos east = currentPos.east();
-            BlockPos south = currentPos.south();
-            BlockPos west = currentPos.west();
-            BlockState northState = worldIn.getBlockState(north);
-            BlockState eastState = worldIn.getBlockState(east);
-            BlockState southState = worldIn.getBlockState(south);
-            BlockState westState = worldIn.getBlockState(west);
-            boolean isNorth = isAttachable(northState);
-            boolean isEast = isAttachable(eastState);
-            boolean isSouth = isAttachable(southState);
-            boolean isWest = isAttachable(westState);
-            if (!stateIn.get(ATTACHED)) {
-                if (isValidGround(stateIn, worldIn, currentPos)) {
-                    return Blocks.AIR.getDefaultState();
-                }
-            }
-            if ((!isNorth || !isSouth || !isEast || !isWest) && !stateIn.get(ATTACHED)) {
-                return Blocks.AIR.getDefaultState();
-            }
-            return this.getDefaultState().with(ATTACHED, true).with(FACING, isNorth ? Direction.NORTH : isEast ? Direction.EAST : isSouth ? Direction.SOUTH : Direction.WEST);
-        } else {
-            return stateIn;
+    public VoxelShape getShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, ISelectionContext selectionContext) {
+        switch(blockState.get(FACING)) {
+            case NORTH:
+                return NORTH_SHAPE;
+            case SOUTH:
+                return SOUTH_SHAPE;
+            case WEST:
+                return WEST_SHAPE;
+            case EAST:
+                return EAST_SHAPE;
+            default:
+                return DOWN_SHAPE;
         }
     }
 
-    private boolean isAttachable(BlockState p_220113_1_) {
-        Block lvt_4_1_ = p_220113_1_.getBlock();
-        boolean isCactus = lvt_4_1_ == ModBlocks.SAGUARO_STEM.get();
-        return isCactus;
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        Direction direction = context.getFace().getOpposite();
+        return this.getDefaultState().with(FACING, direction.getAxis() == Direction.Axis.Y ? Direction.DOWN : direction);
     }
 
     @SuppressWarnings("deprecation")
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        BlockPos north = pos.north();
-        BlockPos east = pos.east();
-        BlockPos south = pos.south();
-        BlockPos west = pos.west();
-        BlockState northState = worldIn.getBlockState(north);
-        BlockState eastState = worldIn.getBlockState(east);
-        BlockState southState = worldIn.getBlockState(south);
-        BlockState westState = worldIn.getBlockState(west);
-        boolean isNorth = isAttachable(northState);
-        boolean isEast = isAttachable(eastState);
-        boolean isSouth = isAttachable(southState);
-        boolean isWest = isAttachable(westState);
-        return isNorth || isSouth || isEast || isWest || isValidGround(state, worldIn, pos);
+        Direction direction = state.get(FACING);
+        Block block = worldIn.getBlockState(pos.offset(direction)).getBlock();
+        if (direction == Direction.DOWN) {
+            return block.isIn(BlockTags.BAMBOO_PLANTABLE_ON) || block == ModBlocks.SAGUARO_BRANCH.get();
+        }
+        return block == ModBlocks.SAGUARO_STEM.get();
     }
 
-    public boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        Block block = state.getBlock();
-        return block.isIn(BlockTags.BAMBOO_PLANTABLE_ON) || block == ModBlocks.SAGUARO_BRANCH.get();
+    @SuppressWarnings("deprecation")
+    public void neighborChanged(BlockState p_220069_1_, World p_220069_2_, BlockPos p_220069_3_, Block p_220069_4_, BlockPos p_220069_5_, boolean p_220069_6_) {
+        this.updateState(p_220069_2_, p_220069_3_, p_220069_1_);
+    }
+
+    private void updateState(World p_176427_1_, BlockPos p_176427_2_, BlockState p_176427_3_) {
+
     }
 
     @SuppressWarnings("deprecation")
@@ -133,26 +87,32 @@ public class SaguaroBranchBlock extends Block implements IPlantable {
         return PushReaction.DESTROY;
     }
 
-    static {
-        ATTACHED = BlockStateProperties.ATTACHED;
-        FACING = HorizontalBlock.HORIZONTAL_FACING;
-        ATTACHED_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
-        TOP_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+    @Override
+    public void grow(ServerWorld serverWorld, Random random, BlockPos blockPos, BlockState blockState) {
+
     }
 
     @Override
-    public PlantType getPlantType(IBlockReader world, BlockPos pos) {
-        return PlantType.Desert;
+    public boolean canGrow(IBlockReader iBlockReader, BlockPos blockPos, BlockState blockState, boolean b) {
+        return false;
     }
 
-    @Override
-    public BlockState getPlant(IBlockReader world, BlockPos pos) {
-        return this.getDefaultState();
+    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+        return (double)worldIn.rand.nextFloat() < 0.45D;
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public SoundType getSoundType(BlockState p_220072_1_) {
         return ModSoundEvents.ModSoundTypes.SAGUARO;
+    }
+
+    static {
+        FACING = BlockStateProperties.FACING_EXCEPT_UP;
+        DOWN_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+        EAST_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+        NORTH_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+        SOUTH_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+        WEST_SHAPE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
     }
 }

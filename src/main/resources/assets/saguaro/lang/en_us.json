@@ -11,5 +11,6 @@
 	"block.saguaro.saguaro_button" : "Saguaro Stem Button",
 	"block.saguaro.saguaro_pressure_plate" : "Saguaro Pressure Plate",
 	"block.saguaro.saguaro_door" : "Saguaro Door",
-	"block.saguaro.saguaro_trapdoor" : "Saguaro Trapdoor"
+	"block.saguaro.saguaro_trapdoor" : "Saguaro Trapdoor",
+	"block.saguaro.saguaro_branch" : "Saguaro Branch"
 }
